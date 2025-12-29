@@ -6,7 +6,7 @@
     <Version>0.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>11</LangVersion>
-	<RootNamespace>alterratech</RootNamespace>
+	<RootNamespace>experimentalmod</RootNamespace>
 
     <RestoreAdditionalProjectSources>
       https://api.nuget.org/v3/index.json;

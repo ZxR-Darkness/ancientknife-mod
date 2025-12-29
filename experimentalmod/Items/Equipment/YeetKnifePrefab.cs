@@ -34,13 +34,13 @@ namespace experimentalmod.Items.Equipment
             };
             customPrefab.SetGameObject(techKnifeObj);
 
-            var recipe = new RecipeData(new Ingredient(TechType.Titanium, 4), new Ingredient(TechType.Gold, 2));
+            var recipe = new RecipeData(new Ingredient(TechType.Uranium, 2), new Ingredient(TechType.Diamond, 2));
             customPrefab.SetRecipe(recipe)
                 .WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Hand);
             customPrefab.Register();
 
-            string encyclopediaKey = "YeetKnife_Info_Page";
+            string encyclopediaKey = "TechKnife_Info_Page";
             LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
             PDAHandler.AddEncyclopediaEntry(
                 encyclopediaKey,
@@ -66,7 +66,7 @@ namespace experimentalmod.Items.Equipment
 
     public class TechKnife : HeatBlade
     {
-        public float hitForce = 3000;
+        public float hitForce = 1000;
         public ForceMode forceMode = ForceMode.Acceleration;
 
         public override string animToolName { get; } = TechType.HeatBlade.AsString(true);
