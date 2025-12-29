@@ -17,22 +17,22 @@ namespace experimentalmod.Items.Equipment
     public static class YeetKnifePrefab
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("YeetKnife", "Yeet Knife", "Powerful knife that makes me go yes.")
+            .WithTechType("TechKnife", "Tech Knife", "Powerful knife that makes me go yes.")
             .WithIcon(SpriteManager.Get(TechType.HeatBlade));
 
         public static void Register()
         {
             var customPrefab = new CustomPrefab(Info);
 
-            var yeetKnifeObj = new CloneTemplate(Info, TechType.HeatBlade);
-            yeetKnifeObj.ModifyPrefab += obj =>
+            var techKnifeObj = new CloneTemplate(Info, TechType.HeatBlade);
+            techKnifeObj.ModifyPrefab += obj =>
             {
                 var heatBlade = obj.GetComponent<HeatBlade>();
-                var yeetKnife = obj.AddComponent<YeetKnife>().CopyComponent(heatBlade);
+                var techKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
                 Object.DestroyImmediate(heatBlade);
-                yeetKnife.damage *= 4f;
+                techKnife.damage *= 4f;
             };
-            customPrefab.SetGameObject(yeetKnifeObj);
+            customPrefab.SetGameObject(techKnifeObj);
 
             var recipe = new RecipeData(new Ingredient(TechType.Titanium, 4), new Ingredient(TechType.Gold, 2));
             customPrefab.SetRecipe(recipe)
@@ -41,11 +41,12 @@ namespace experimentalmod.Items.Equipment
             customPrefab.Register();
 
             string encyclopediaKey = "YeetKnife_Info_Page";
+            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
             PDAHandler.AddEncyclopediaEntry(
                 encyclopediaKey,
-                "Tech/Equipment",
-                "[Deleted knife]",
-                "Этот нож был обнаружен в заброшенных данных 'Альтерры'. Его лезвие настроено на гравитационный резонанс.\n\nПредупреждение: использование против Левиафанов может привести к их внезапному исчезновению за горизонтом."
+                "Tech/Secrets",
+                "Неизвестный Нож",
+                "Этот нож был обнаружен в заброшенных данных 'Альтерры'. Его лезвие настроено на гравитационный резонанс.\n Нож оснащён встроенным ускорителем, позволяющим нанести значительный урон.\n\nПредупреждение: использование против Левиафанов может привести к их внезапному исчезновению за горизонтом."
 
             );
             StoryGoalHandler.RegisterItemGoal(encyclopediaKey, Story.GoalType.Encyclopedia, Info.TechType);
@@ -54,16 +55,16 @@ namespace experimentalmod.Items.Equipment
             PDAHandler.AddEncyclopediaEntry(
 
                 keyancient,
-                "Tech/Equipment",
-                "Скрытые данные",
-                "test"
+                "Tech/Secrets",
+                "Получен Доступ",
+                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтера».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
                 );
             StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
         }
         
     }
 
-    public class YeetKnife : HeatBlade
+    public class TechKnife : HeatBlade
     {
         public float hitForce = 3000;
         public ForceMode forceMode = ForceMode.Acceleration;
