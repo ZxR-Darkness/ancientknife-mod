@@ -7,14 +7,11 @@ using Nautilus.Handlers;
 using Story;
 using UnityEngine;
 using BepInEx.Logging;
-using System.Reflection;
-using BepInEx;
 using experimentalmod.Items.Equipment;
 using HarmonyLib;
-
 namespace experimentalmod.Items.Equipment
 {
-    public static class YeetKnifePrefab
+    public static class TechKnifePrefab
     {
         public static PrefabInfo Info { get; } = PrefabInfo
             .WithTechType("TechKnife", "Tech Knife", "Powerful knife that makes me go yes.")
@@ -34,7 +31,7 @@ namespace experimentalmod.Items.Equipment
             };
             customPrefab.SetGameObject(techKnifeObj);
 
-            var recipe = new RecipeData(new Ingredient(TechType.Uranium, 2), new Ingredient(TechType.Diamond, 2));
+            var recipe = new RecipeData(new Ingredient(TechType.Uranium, 2), new Ingredient(TechType.Diamond, 2), new Ingredient(TechType.HeatBlade, 1));
             customPrefab.SetRecipe(recipe)
                 .WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Hand);
@@ -57,7 +54,7 @@ namespace experimentalmod.Items.Equipment
                 keyancient,
                 "Tech/Secrets",
                 "Получен Доступ",
-                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтера».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
+                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтерра».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
                 );
             StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
         }

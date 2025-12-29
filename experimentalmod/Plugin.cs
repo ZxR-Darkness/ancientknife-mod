@@ -27,7 +27,7 @@ namespace experimentalmod
         {
             // Достаточно вызвать только это. 
             // Внутри YeetKnifePrefab.Register() мы уже добавили StoryGoalHandler.RegisterItemGoal
-            YeetKnifePrefab.Register();
+            TechKnifePrefab.Register();
         }
     }
 }
