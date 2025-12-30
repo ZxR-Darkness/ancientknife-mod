@@ -27,7 +27,7 @@ namespace experimentalmod.Items.Equipment
                 var heatBlade = obj.GetComponent<HeatBlade>();
                 var techKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
                 Object.DestroyImmediate(heatBlade);
-                techKnife.damage *= 4f;
+                techKnife.damage *= 10f;
             };
             customPrefab.SetGameObject(techKnifeObj);
 
@@ -35,8 +35,15 @@ namespace experimentalmod.Items.Equipment
             customPrefab.SetRecipe(recipe)
                 .WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Hand);
-            customPrefab.Register();
+            string keyancient = "alterrakey";
+            PDAHandler.AddEncyclopediaEntry(
 
+                keyancient,
+                "Tech/Secrets",
+                "Получен Доступ",
+                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтерра».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
+                );
+            StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
             string encyclopediaKey = "TechKnife_Info_Page";
             LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
             PDAHandler.AddEncyclopediaEntry(
@@ -47,23 +54,14 @@ namespace experimentalmod.Items.Equipment
 
             );
             StoryGoalHandler.RegisterItemGoal(encyclopediaKey, Story.GoalType.Encyclopedia, Info.TechType);
-
-            string keyancient = "alterrakey";
-            PDAHandler.AddEncyclopediaEntry(
-
-                keyancient,
-                "Tech/Secrets",
-                "Получен Доступ",
-                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтерра».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
-                );
-            StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
+            customPrefab.Register();
         }
         
     }
 
     public class TechKnife : HeatBlade
     {
-        public float hitForce = 1000;
+        public float hitForce = 500;
         public ForceMode forceMode = ForceMode.Acceleration;
 
         public override string animToolName { get; } = TechType.HeatBlade.AsString(true);
