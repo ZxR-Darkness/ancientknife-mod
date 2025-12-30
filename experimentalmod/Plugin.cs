@@ -2,6 +2,7 @@
 using BepInEx;
 using BepInEx.Logging;
 using experimentalmod.Items.Equipment;
+using experimentalmod.Items;
 using HarmonyLib;
 
 namespace experimentalmod
@@ -28,6 +29,8 @@ namespace experimentalmod
             // Достаточно вызвать только это. 
             // Внутри YeetKnifePrefab.Register() мы уже добавили StoryGoalHandler.RegisterItemGoal
             TechKnifePrefab.Register();
+            //AlterraBlackBox.Register();
+            ShadowRebreather.Register();
         }
     }
 }

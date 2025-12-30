@@ -35,6 +35,8 @@ namespace experimentalmod.Items.Equipment
             customPrefab.SetRecipe(recipe)
                 .WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Hand);
+            customPrefab.SetUnlock(TechType.HeatBlade);
+            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
             string keyancient = "alterrakey";
             PDAHandler.AddEncyclopediaEntry(
 
@@ -45,7 +47,6 @@ namespace experimentalmod.Items.Equipment
                 );
             StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
             string encyclopediaKey = "TechKnife_Info_Page";
-            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
             PDAHandler.AddEncyclopediaEntry(
                 encyclopediaKey,
                 "Tech/Secrets",
