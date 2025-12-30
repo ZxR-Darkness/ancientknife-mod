@@ -20,13 +20,13 @@ namespace experimentalmod.Items.Equipment
             var clone = new CloneTemplate(Info, TechType.Rebreather);
             clone.ModifyPrefab += obj =>
             {
-                // Добавляем логику работы предмета
+
                 obj.AddComponent<ShadowRebreatherLogic>();
             };
 
             customPrefab.SetGameObject(clone);
 
-            // Рецепт (дорогой)
+
             var recipe = new RecipeData(new Ingredient(TechType.Rebreather, 1), new Ingredient(TechType.Diamond, 2), new Ingredient(TechType.Uranium, 1));
             customPrefab.SetRecipe(recipe)
                 .WithFabricatorType(CraftTree.Type.Fabricator);
@@ -59,21 +59,21 @@ namespace experimentalmod.Items.Equipment
 
         void Update()
         {
-            // Проверяем, надет ли этот предмет на голову игрока
+
             isEquipped = Inventory.main.equipment.GetCount(ShadowRebreather.Info.TechType) > 0;
 
             if (!isEquipped) return;
 
             float depth = Player.main.GetDepth();
 
-            // 1. ЭФФЕКТ: Бесконечный воздух на глубине > 500м
+
             if (depth > 500f)
             {
-                // Каждую секунду восстанавливаем чуть-чуть кислорода, чтобы он не тратился
+
                 Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 1.5f);
             }
 
-            // 2. ЭФФЕКТ: Галлюцинации (раз в 2 минуты)
+
             if (Time.time > nextHallucinationTime)
             {
                 TriggerHallucination();

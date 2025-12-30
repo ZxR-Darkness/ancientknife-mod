@@ -25,34 +25,33 @@ namespace experimentalmod.Items.Equipment
 
             techKnifeObj.ModifyPrefab += obj =>
             {
-                // 1. ЛОГИКА КОМПОНЕНТОВ (Твой оригинальный код)
+
                 var heatBlade = obj.GetComponent<HeatBlade>();
                 var techKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
                 Object.DestroyImmediate(heatBlade);
                 techKnife.damage *= 10f;
 
-                // 2. ЗАМЕНА ТЕКСТУР (Логика O.S. TEAM)
-                // Получаем путь к папке, где лежит твоя DLL
+
                 string modPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-                // Пути к твоим картинкам в папке Assets
+
                 string diffusePath = Path.Combine(modPath, "Assets", "knife_01_hot.png");
                 string illumPath = Path.Combine(modPath, "Assets", "knife_01_hot_illum.png");
 
-                // Находим все части модели ножа
+
                 var renderers = obj.GetComponentsInChildren<Renderer>(true);
                 foreach (var renderer in renderers)
                 {
-                    // Меняем основную текстуру (цвет лезвия и рукояти)
+
                     if (File.Exists(diffusePath))
                     {
                         renderer.material.mainTexture = ImageUtils.LoadTextureFromFile(diffusePath);
                     }
 
-                    // Меняем карту свечения (чтобы горел нужным цветом в темноте)
+
                     if (File.Exists(illumPath))
                     {
-                        // В Subnautica этот параметр часто называется _Illum или _EmissionMap
+
                         renderer.material.SetTexture("_Illum", ImageUtils.LoadTextureFromFile(illumPath));
                     }
                 }
