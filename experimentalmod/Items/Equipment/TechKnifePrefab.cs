@@ -15,21 +15,21 @@ namespace experimentalmod.Items.Equipment
     public static class TechKnifePrefab
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("TechKnife", "Tech Knife", "Powerful knife that makes me go yes.")
+            .WithTechType("ShadowKnife", "Shadow Knife", "Powerful knife that makes me go yes.")
             .WithIcon(SpriteManager.Get(TechType.HeatBlade));
 
         public static void Register()
         {
             var customPrefab = new CustomPrefab(Info);
-            var techKnifeObj = new CloneTemplate(Info, TechType.HeatBlade);
+            var ShadowKnifeObj = new CloneTemplate(Info, TechType.HeatBlade);
 
-            techKnifeObj.ModifyPrefab += obj =>
+            ShadowKnifeObj.ModifyPrefab += obj =>
             {
 
                 var heatBlade = obj.GetComponent<HeatBlade>();
-                var techKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
+                var shadowKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
                 Object.DestroyImmediate(heatBlade);
-                techKnife.damage *= 10f;
+                shadowKnife.damage *= 10f;
 
 
                 string modPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -57,7 +57,7 @@ namespace experimentalmod.Items.Equipment
                 }
             };
 
-            customPrefab.SetGameObject(techKnifeObj);
+            customPrefab.SetGameObject(ShadowKnifeObj);
 
             // Рецепт
             var recipe = new RecipeData(
