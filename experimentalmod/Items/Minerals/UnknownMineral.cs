@@ -42,7 +42,7 @@ namespace experimentalmod.Items.Minerals
 
             customPrefab.SetGameObject(mineralClone);
             customPrefab.SetSpawns(
-                new LootDistributionData.BiomeData { biome = BiomeType.GrassyPlateaus_Grass, count = 1, probability = 0.1f }
+                new LootDistributionData.BiomeData { biome = BiomeType.GrassyPlateaus_Grass, count = 2, probability = 0.1f }
             );
 
             customPrefab.SetEquipment(EquipmentType.None);

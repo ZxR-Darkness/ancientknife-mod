@@ -28,10 +28,10 @@ namespace experimentalmod
 
         private void InitializePrefabs()
         {
+            UnknownMinerales.Register();
             TechKnifePrefab.Register();
             //AlterraBlackBox.Register();
             ShadowRebreather.Register();
-            UnknownMinerales.Register();
         }
     }
 }
