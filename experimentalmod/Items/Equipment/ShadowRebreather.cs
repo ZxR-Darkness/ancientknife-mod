@@ -4,102 +4,94 @@ using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
 using Nautilus.Handlers;
 using UnityEngine;
+using Nautilus.Utility;
 
 namespace experimentalmod.Items.Equipment
 {
     public static class ShadowRebreather
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("ShadowRebreather", "Ребризер 'Тень'", "Экспериментальный прототип. Убирает штраф на кислород на глубине, но дестабилизирует восприятие.")
+            .WithTechType("ShadowRebreather", "Ребризер 'Тень'", "Экспериментальный прототип. Стабилизирует кислород за счет психики.")
             .WithIcon(SpriteManager.Get(TechType.Rebreather));
 
         public static void Register()
         {
             var customPrefab = new CustomPrefab(Info);
-
             var clone = new CloneTemplate(Info, TechType.Rebreather);
-            clone.ModifyPrefab += obj =>
-            {
-
-                obj.AddComponent<ShadowRebreatherLogic>();
-            };
 
             customPrefab.SetGameObject(clone);
 
-
-            var recipe = new RecipeData(new Ingredient(TechType.Rebreather, 1), new Ingredient(TechType.Diamond, 2), new Ingredient(TechType.Uranium, 1));
-            customPrefab.SetRecipe(recipe)
-                .WithFabricatorType(CraftTree.Type.Fabricator);
-
-            customPrefab.SetEquipment(EquipmentType.Head);
-            string keyrebreather = "RebreatherShad";
-            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
-            PDAHandler.AddEncyclopediaEntry(
-                keyrebreather,
-                "Tech/Secrets",
-                "Теневой Ребризер",
-                "Этот ребризер не просто поддерживает дыхание — он переписывает способ, которым вы ощущаете глубину.\n\n" +
-                "На экстремальных уровнях давления устройство стабилизирует подачу кислорода, но взамен нарушает работу восприятия.\n\n" +
-                "Испытуемые сообщали о голосах, предупреждениях, которых нет в системе, и ощущении, что глубина наблюдает за ними.\n\n" +
-                "'Alterra' официально отрицает существование данного прототипа."
-
+            var recipe = new RecipeData(
+                new Ingredient(TechType.Rebreather, 1),
+                new Ingredient(TechType.Magnetite, 2),
+                new Ingredient(TechType.Uranium, 1)
             );
-            StoryGoalHandler.RegisterItemGoal(keyrebreather, Story.GoalType.Encyclopedia, Info.TechType);
 
-            customPrefab.SetUnlock(TechType.Rebreather);
+            customPrefab.SetRecipe(recipe).WithFabricatorType(CraftTree.Type.Fabricator);
+            customPrefab.SetEquipment(EquipmentType.Head);
+
+            // Энциклопедия
+            string keyrebreather = "ShadowRebreatherEncy";
+            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Тайные разработки");
+            PDAHandler.AddEncyclopediaEntry(
+                keyrebreather, 
+                "Tech/Secrets", 
+                "Теневой Ребризер",
+                "Устройство компенсирует давление на глубине...\n\n'Оно дышит за тебя...'");
+
             customPrefab.Register();
+
+            var controller = new GameObject("ShadowRebreatherController");
+            controller.AddComponent<ShadowRebreatherLogic>();
+            Object.DontDestroyOnLoad(controller);
         }
     }
 
-    // ЛОГИКА РЕБРИЗЕРА
     public class ShadowRebreatherLogic : MonoBehaviour
     {
-        private float nextHallucinationTime;
-        private bool isEquipped;
+        private float nextEffectTime;
 
         void Update()
         {
+            if (Player.main == null || Inventory.main == null) return;
 
-            isEquipped = Inventory.main.equipment.GetCount(ShadowRebreather.Info.TechType) > 0;
-
+            bool isEquipped = Inventory.main.equipment.GetCount(ShadowRebreather.Info.TechType) > 0;
             if (!isEquipped) return;
 
-            float depth = Player.main.GetDepth();
 
-
-            if (depth > 500f)
+            if (Player.main.IsUnderwater() && Player.main.GetDepth() > 100f)
             {
-
-                Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 1.5f);
+                Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 0.5f);
             }
 
-
-            if (Time.time > nextHallucinationTime)
+            if (Time.time > nextEffectTime)
             {
-                TriggerHallucination();
-                nextHallucinationTime = Time.time + 120f; // 120 секунд
+                float depth = Player.main.GetDepth();
+                float depthFactor = Mathf.Clamp01(depth / 600f);
+                float delay = Mathf.Lerp(90f, 20f, depthFactor);
+
+                TriggerEffect(depth);
+                nextEffectTime = Time.time + delay;
             }
         }
 
-        private void TriggerHallucination()
+        private void TriggerEffect(float depth)
         {
-            int effect = Random.Range(0, 3);
-            switch (effect)
+            int rnd = Random.Range(0, 100);
+
+            if (rnd < 40)
             {
-                case 0:
-                    ErrorMessage.AddMessage("Вы слышите шепот: 'Они не должны были найти это...'");
-                    break;
-
-                case 1:
-                    // Тряска камеры (рабочая)
-                    MainCameraControl.main.ShakeCamera(2f, 1f);
-                    break;
-
-                case 2:
-                    ErrorMessage.AddMessage("Alterra: ВНИМАНИЕ. Обнаружена нейронная нестабильность.");
-                    break;
+                ErrorMessage.AddMessage("Шепот: 'Ты зашел слишком далеко...'");
+            }
+            else if (rnd < 70)
+            {
+                if (MainCameraControl.main != null)
+                    MainCameraControl.main.ShakeCamera(1.5f, 0.8f);
+            }
+            else if (depth > 400f)
+            {
+                ErrorMessage.AddMessage("СИСТЕМА: Обнаружены фантомные сигналы биомассы.");
             }
         }
-
     }
 }

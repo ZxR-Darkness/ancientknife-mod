@@ -16,7 +16,7 @@ namespace experimentalmod.Items.Equipment
     public static class TechKnifePrefab
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("ShadowKnife", "Shadow Knife", "Powerful knife that makes me go yes.")
+            .WithTechType("ShadowKnife", "Shadow Knife", "тайная разработка альтерры")
             .WithIcon(SpriteManager.Get(TechType.HeatBlade));
 
         public static void Register()
