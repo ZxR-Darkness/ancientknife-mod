@@ -5,6 +5,7 @@ using experimentalmod.Items.Equipment;
 using experimentalmod.Items;
 using experimentalmod.Items.Minerals;
 using HarmonyLib;
+using System.IO;
 
 namespace experimentalmod
 {
@@ -27,8 +28,6 @@ namespace experimentalmod
 
         private void InitializePrefabs()
         {
-            // Достаточно вызвать только это. 
-            // Внутри YeetKnifePrefab.Register() мы уже добавили StoryGoalHandler.RegisterItemGoal
             TechKnifePrefab.Register();
             //AlterraBlackBox.Register();
             ShadowRebreather.Register();
