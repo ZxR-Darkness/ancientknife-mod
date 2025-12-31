@@ -3,6 +3,7 @@ using BepInEx;
 using BepInEx.Logging;
 using experimentalmod.Items.Equipment;
 using experimentalmod.Items;
+using experimentalmod.Items.Minerals;
 using HarmonyLib;
 
 namespace experimentalmod
@@ -31,6 +32,7 @@ namespace experimentalmod
             TechKnifePrefab.Register();
             //AlterraBlackBox.Register();
             ShadowRebreather.Register();
+            UnknownMinerales.Register();
         }
     }
 }
