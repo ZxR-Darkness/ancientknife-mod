@@ -38,6 +38,7 @@ namespace experimentalmod.Items.Equipment
                 "Tech/Secrets", 
                 "Теневой Ребризер",
                 "Устройство компенсирует давление на глубине...\n\n'Оно дышит за тебя...'");
+            StoryGoalHandler.RegisterItemGoal(keyrebreather, Story.GoalType.Encyclopedia, Info.TechType);
 
             customPrefab.Register();
 
