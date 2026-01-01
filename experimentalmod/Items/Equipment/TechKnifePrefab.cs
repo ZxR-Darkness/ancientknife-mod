@@ -15,6 +15,7 @@ namespace experimentalmod.Items.Equipment
 {
     public static class TechKnifePrefab
     {
+        public static string modPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static PrefabInfo Info { get; } = PrefabInfo
             .WithTechType("ShadowKnife", "Shadow Knife", "тайная разработка альтерры")
             .WithIcon(SpriteManager.Get(TechType.HeatBlade));
@@ -31,10 +32,6 @@ namespace experimentalmod.Items.Equipment
                 var shadowKnife = obj.AddComponent<TechKnife>().CopyComponent(heatBlade);
                 Object.DestroyImmediate(heatBlade);
                 shadowKnife.damage *= 10f;
-
-
-                string modPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
 
                 string diffusePath = Path.Combine(modPath, "Assets", "knife_01_hot.png");
                 string illumPath = Path.Combine(modPath, "Assets", "knife_01_hot_illum.png");
