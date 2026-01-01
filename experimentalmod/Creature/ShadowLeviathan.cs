@@ -35,7 +35,7 @@ namespace experimentalmod.Items
                 AcidImmune = true,
 
                 // Настройка физики движения
-                LocomotionData = new LocomotionData(5f, 0.2f),
+                LocomotionData = new LocomotionData(2f, 0.2f),
 
                 // Синхронизация скорости с аниматором
                 AnimateByVelocityData = new AnimateByVelocityData(15f),
