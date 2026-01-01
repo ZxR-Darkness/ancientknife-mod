@@ -17,23 +17,23 @@ namespace experimentalmod
     {
         public new static ManualLogSource Logger { get; private set; }
         private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-        private static string AssetsFolder => Path.Combine(Path.GetDirectoryName(Assembly.Location), "Assets");
+        //private static string AssetsFolder => Path.Combine(Path.GetDirectoryName(Assembly.Location), "Assets");
 
         private void Awake()
         {
             Logger = base.Logger;
-            string bundlePath = Path.Combine(AssetsFolder, "myassetbundle");
+            //string bundlePath = Path.Combine(AssetsFolder, "myassetbundle");
 
-            if (File.Exists(bundlePath))
-            {
-                StaticStructures.Bundle = AssetBundle.LoadFromFile(bundlePath);
-                Logger.LogInfo("Бандл успешно загружен в память!");
-            }
-            else
-            {
-                Logger.LogError($"Файл бандла не найден! Проверь путь: {bundlePath}");
-                return;
-            }
+            //if (File.Exists(bundlePath))
+            //{
+            //    StaticStructures.Bundle = AssetBundle.LoadFromFile(bundlePath);
+            //    Logger.LogInfo("Бандл успешно загружен в память!");
+            //}
+            //else
+            //{
+            //    Logger.LogError($"Файл бандла не найден! Проверь путь: {bundlePath}");
+            //    return;
+            //}
 
             InitializePrefabs();
             Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
@@ -42,11 +42,11 @@ namespace experimentalmod
 
         private void InitializePrefabs()
         {
-            var shadowLevInfo = PrefabInfo.WithTechType("ShadowLev", "Shadow Leviathan", "Теневой ужас.");
-            var shadowLev = new ShadowLeviathan(shadowLevInfo);
-            shadowLev.Register();
-            UnknownMinerales.Register();
+            //var shadowLevInfo = PrefabInfo.WithTechType("ShadowLev", "Shadow Leviathan", "Теневой ужас.");
+            //var shadowLev = new ShadowLeviathan(shadowLevInfo);
+            //shadowLev.Register();
             StaticStructures.Register();
+            UnknownMinerales.Register();
             TechKnifePrefab.Register();
             ShadowRebreather.Register();
         }
