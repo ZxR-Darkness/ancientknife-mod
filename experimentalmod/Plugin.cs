@@ -29,9 +29,6 @@ namespace experimentalmod
 
         private void InitializePrefabs()
         {
-            //var shadowLevInfo = PrefabInfo.WithTechType("ShadowLev", "Shadow Leviathan", "Теневой ужас.");
-            //var shadowLev = new ShadowLeviathan(shadowLevInfo);
-            //shadowLev.Register();
             StaticStructures.Register();
             UnknownMinerales.Register();
             TechKnifePrefab.Register();

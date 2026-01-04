@@ -11,19 +11,26 @@ namespace experimentalmod.Items
     {
         public static AssetBundle Bundle;
         public static string ModPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
+        public static PrefabInfo titanicInfo { get; } = PrefabInfo
+            .WithTechType("TitanicStructure", "Titanic", "Огромный обломок древнего судна.");
         public static void Register()
         {
             string bundlePath = Path.Combine(ModPath, "Assets", "myassetbundle");
 
             if (!File.Exists(bundlePath)) return;
             Bundle = AssetBundle.LoadFromFile(bundlePath);
-            var titanicInfo = PrefabInfo.WithTechType("TitanicStructure", "Titanic", "Огромный обломок древнего судна.");
-
             var titanicPrefab = CreateBasePrefab(titanicInfo, "Assets/GameObject.prefab");
 
+            EncyPda();
+
+            titanicPrefab.Register();
+
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(titanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
+        }
 
 
+        private static void EncyPda()
+        {
             string titanicEncy = "Titanic";
 
             PDAHandler.AddEncyclopediaEntry(
@@ -31,6 +38,7 @@ namespace experimentalmod.Items
                 "Tech/Secrets",
                 "Старый Корабль",
                 "корабль который неизвестным образом оказался на планете 4546B...\n 'Альтерра' не стала коментировать данный обьект"
+
             );
 
             PDAHandler.AddCustomScannerEntry
@@ -40,12 +48,7 @@ namespace experimentalmod.Items
             destroyAfterScan: false,
             encyclopediaKey: titanicEncy
             );
-
-            titanicPrefab.Register();
-
-            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(titanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
         }
-
         private static CustomPrefab CreateBasePrefab(PrefabInfo info, string assetPath)
         {
             var customPrefab = new CustomPrefab(info);
