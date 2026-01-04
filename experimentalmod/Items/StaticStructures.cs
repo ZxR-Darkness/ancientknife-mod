@@ -22,6 +22,25 @@ namespace experimentalmod.Items
 
             var titanicPrefab = CreateBasePrefab(titanicInfo, "Assets/GameObject.prefab");
 
+
+
+            string titanicEncy = "Titanic";
+
+            PDAHandler.AddEncyclopediaEntry(
+                titanicEncy,
+                "Tech/Secrets",
+                "Старый Корабль",
+                "корабль который неизвестным образом оказался на планете 4546B...\n 'Альтерра' не стала коментировать данный обьект"
+            );
+
+            PDAHandler.AddCustomScannerEntry
+            (
+            titanicInfo.TechType,
+            scanTime: 2f,
+            destroyAfterScan: false,
+            encyclopediaKey: titanicEncy
+            );
+
             titanicPrefab.Register();
 
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(titanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));

@@ -22,19 +22,6 @@ namespace experimentalmod
         private void Awake()
         {
             Logger = base.Logger;
-            string bundlePath = Path.Combine(AssetsFolder, "myassetbundle");
-
-            if (File.Exists(bundlePath))
-            {
-                StaticStructures.Bundle = AssetBundle.LoadFromFile(bundlePath);
-                Logger.LogInfo("Бандл успешно загружен в память!");
-            }
-            else
-            {
-                Logger.LogError($"Файл бандла не найден! Проверь путь: {bundlePath}");
-                return;
-            }
-
             InitializePrefabs();
             Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
