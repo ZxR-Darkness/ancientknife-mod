@@ -77,24 +77,38 @@ namespace experimentalmod.Items.Equipment
 
         private static void RegisterEncyclopedia()
         {
-            LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Ancients");
+            LanguageHandler.SetLanguageLine("EncyPath_Tech/Shadow Protocol", "PROJECT SHADOW");
 
             string keyancient = "alterrakey";
             PDAHandler.AddEncyclopediaEntry(
                 keyancient,
                 "Tech/Secrets",
-                "Получен Доступ",
-                "Внимание, вы только что незаконно получили доступ к конфиденциальной информации,\n составляющей коммерческую тайну компании «Альтерра».\nВ случае обнаружения данных в вашем КПК будет проведено расследование.\n"
+                "СТАТУС:Теневой доступ",
+                "<color=#ff0000ff>ВНИМАНИЕ:</color> Обнаружено незаконное проникновение в зашифрованный сектор данных.\n\n" +
+                "Вы просматриваете файл под грифом <b>'Shadow-Protocol'</b>. Любая попытка передачи этих координат на сервера Альтерры будет заблокирована вашим ИИ.\n\n" +
+                "<i>«Некоторые вещи должны оставаться во тьме».</i>"
             );
             StoryGoalHandler.RegisterItemGoal(keyancient, Story.GoalType.Encyclopedia, Info.TechType);
 
-            string encyclopediaKey = "TechKnife_Info_Page";
+            string encyclopediaKey = "ShadowKnife_Info_Page";
+
+            string shadowDescription =
+                "<color=#555555ff>Прототип: Теневого Ножа </color>\n\n" +
+                "Данный образец холодного оружия использует технологию <b>«светопоглощающего резонанса»</b>. " +
+                "Лезвие ножа практически не отражает фотоны, что создает эффект «дрожащей тени» при движении.\n\n" +
+                "<b>Технические особенности:</b>\n" +
+                "• <b>Гравитационный ускоритель:</b> Позволяет лезвию игнорировать сопротивление воды.\n" +
+                "• <b>Резонансный модуль:</b> Настроен на разрушение биологических связей на атомном уровне.\n\n" +
+                "<color=#ffff00ff>ПРЕДУПРЕЖДЕНИЕ:</color>\n" +
+                "При контакте с крупными биологическими формами (класс Левиафан) возникает эффект сверхмассового импульса. " +
+                "Объект может быть мгновенно вытеснен из текущего пространства в неопределенном направлении.\n\n" +
+                "<i>«Один удар — и тишина».</i>";
 
             PDAHandler.AddEncyclopediaEntry(
                 encyclopediaKey,
                 "Tech/Secrets",
-                "Неизвестный Нож",
-                "Этот нож был обнаружен в заброшенных данных 'Альтерры'. Его лезвие настроено на гравитационный резонанс.\n Нож оснащён встроенным ускорителем, позволяющим нанести значительный урон.\n\nПредупреждение: использование против Левиафанов может привести к их внезапному исчезновению за горизонтом."
+                "Теневой Нож",
+                shadowDescription
             );
             StoryGoalHandler.RegisterItemGoal(encyclopediaKey, Story.GoalType.Encyclopedia, Info.TechType);
         }
