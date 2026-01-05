@@ -29,7 +29,7 @@ namespace experimentalmod.Items.Equipment
 
             customPrefab.SetRecipe(recipe).WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Head);
-
+            customPrefab.SetUnlock(TechType.Rebreather);
             // Энциклопедия
             string keyrebreather = "ShadowRebreatherEncy";
             LanguageHandler.SetLanguageLine("EncyPath_Tech/Secrets", "Тайные разработки");
