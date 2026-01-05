@@ -35,6 +35,7 @@ namespace experimentalmod.Items
 
         private static void EncyPda()
         {
+            LanguageHandler.SetLanguageLine("EncyPath_Tech/Shadow Protocol", "PROJECT SHADOW");
             string titanicEncy = "Titanic";
 
             string description = "Запись: Объект \"Титаник\" — Находка на глубине\n" +
@@ -46,7 +47,7 @@ namespace experimentalmod.Items
 
             PDAHandler.AddEncyclopediaEntry(
                 titanicEncy,
-                "Tech/Secrets",
+                "Tech/Shadow Protocol",
                 "Старый Корабль",
                 description
             );

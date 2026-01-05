@@ -82,7 +82,7 @@ namespace experimentalmod.Items.Equipment
             string keyancient = "alterrakey";
             PDAHandler.AddEncyclopediaEntry(
                 keyancient,
-                "Tech/Secrets",
+                "Tech/Shadow Protocol",
                 "СТАТУС:Теневой доступ",
                 "<color=#ff0000ff>ВНИМАНИЕ:</color> Обнаружено незаконное проникновение в зашифрованный сектор данных.\n\n" +
                 "Вы просматриваете файл под грифом <b>'Shadow-Protocol'</b>. Любая попытка передачи этих координат на сервера Альтерры будет заблокирована вашим ИИ.\n\n" +
@@ -106,7 +106,7 @@ namespace experimentalmod.Items.Equipment
 
             PDAHandler.AddEncyclopediaEntry(
                 encyclopediaKey,
-                "Tech/Secrets",
+                "Tech/Shadow Protocol",
                 "Теневой Нож",
                 shadowDescription
             );
