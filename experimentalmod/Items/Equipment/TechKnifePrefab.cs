@@ -17,7 +17,7 @@ namespace experimentalmod.Items.Equipment
     {
         public static string modPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("ShadowKnife", "Shadow Knife", "тайная разработка альтерры")
+            .WithTechType("ShadowKnife", "Теневой Нож", "тайная разработка альтерры")
             .WithIcon(SpriteManager.Get(TechType.HeatBlade));
 
         public static void Register()
