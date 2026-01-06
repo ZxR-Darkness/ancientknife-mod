@@ -19,18 +19,15 @@ namespace experimentalmod.Items
             string bundlePath = Path.Combine(ModPath, "Assets", "myassetbundle");
 
             if (!File.Exists(bundlePath)) return;
-
-
             if (Bundle == null)
                 Bundle = AssetBundle.LoadFromFile(bundlePath);
-
             var titanicPrefab = CreateBasePrefab(titanicInfo, "Assets/GameObject.prefab");
-
             EncyPda();
-
             titanicPrefab.Register();
-
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(titanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
+
+            // Тест спавна предмета
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TechType.PrecursorIonCrystal, new Vector3(-1500, -200, 0)));
         }
 
         private static void EncyPda()

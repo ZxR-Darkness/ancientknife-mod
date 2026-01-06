@@ -1,6 +1,7 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Handlers;
 using Nautilus.Utility;
 using System.IO;
 using System.Reflection;
@@ -42,11 +43,10 @@ namespace experimentalmod.Items.Minerals
 
             customPrefab.SetGameObject(mineralClone);
             customPrefab.SetSpawns(
-                new LootDistributionData.BiomeData { biome = BiomeType.GrassyPlateaus_Grass, count = 2, probability = 0.3f }
+                new LootDistributionData.BiomeData { biome = BiomeType.SafeShallows_Grass, count = 1, probability = 0.5f },
+                new LootDistributionData.BiomeData { biome = BiomeType.GrassyPlateaus_CaveFloor, count = 1, probability = 0.5f }
             );
-
             customPrefab.SetEquipment(EquipmentType.None);
-
             customPrefab.Register();
         }
     }
