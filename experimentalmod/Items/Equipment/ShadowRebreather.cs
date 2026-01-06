@@ -21,7 +21,6 @@ namespace experimentalmod.Items.Equipment
             var clone = new CloneTemplate(Info, TechType.Rebreather);
 
             customPrefab.SetGameObject(clone);
-
             var recipe = new RecipeData(
                 new Ingredient(TechType.Rebreather, 1),
                 new Ingredient(UnknownMinerales.Info.TechType, 2),

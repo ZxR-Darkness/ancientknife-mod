@@ -11,23 +11,30 @@ namespace experimentalmod.Items
     {
         public static AssetBundle Bundle;
         public static string ModPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public static PrefabInfo titanicInfo { get; } = PrefabInfo
+        public static PrefabInfo TitanicInfo { get; } = PrefabInfo
             .WithTechType("TitanicStructure", "Titanic", "Огромный обломок древнего судна.");
+
+        public static PrefabInfo ServerInfo { get; } = PrefabInfo.WithTechType("ServerStructure", "Server", "Старый Сервер");
 
         public static void Register()
         {
-            string bundlePath = Path.Combine(ModPath, "Assets", "myassetbundle");
+            string bundlePath = Path.Combine(ModPath, "Assets", "assetbundlev2");
 
             if (!File.Exists(bundlePath)) return;
             if (Bundle == null)
                 Bundle = AssetBundle.LoadFromFile(bundlePath);
-            var titanicPrefab = CreateBasePrefab(titanicInfo, "Assets/GameObject.prefab");
+            var titanicPrefab = CreateBasePrefab(TitanicInfo, "Assets/titanic.prefab");
+            var serverPrefab = CreateBasePrefab(ServerInfo, "Assets/serverV3.prefab");
             EncyPda();
+
+            serverPrefab.Register();
             titanicPrefab.Register();
-            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(titanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
+
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(ServerInfo.TechType, new Vector3Int(0, 10, 0)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TitanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
 
             // Тест спавна предмета
-            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TechType.PrecursorIonCrystal, new Vector3(-1500, -200, 0)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TechType.PrecursorIonCrystal, new Vector3(0, 30, 0)));
         }
 
         private static void EncyPda()
@@ -49,11 +56,25 @@ namespace experimentalmod.Items
                 description
             );
 
+            string serverEncy = "Server";
+            PDAHandler.AddEncyclopediaEntry(
+                serverEncy,
+                "Tech/Shadow Protocol",
+                "TEST",
+                "TEST"
+             );
+
             PDAHandler.AddCustomScannerEntry(
-                titanicInfo.TechType,
+                TitanicInfo.TechType,
                 scanTime: 2f,
                 destroyAfterScan: false,
                 encyclopediaKey: titanicEncy
+            );
+            PDAHandler.AddCustomScannerEntry(
+                ServerInfo.TechType,
+                scanTime: 2f,
+                destroyAfterScan: true,
+                encyclopediaKey: serverEncy
             );
         }
 
