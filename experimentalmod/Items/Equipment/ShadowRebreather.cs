@@ -1,17 +1,18 @@
-﻿using Nautilus.Assets;
+﻿using experimentalmod.Items.Minerals;
+using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
 using Nautilus.Handlers;
-using UnityEngine;
 using Nautilus.Utility;
+using UnityEngine;
 
 namespace experimentalmod.Items.Equipment
 {
     public static class ShadowRebreather
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("ShadowRebreather", "Ребризер 'Тень'", "Экспериментальный прототип. Стабилизирует кислород за счет психики субъекта.")
+            .WithTechType("ShadowRebreather", "Ребризер 'Тень'WIP", "Экспериментальный прототип. Стабилизирует кислород за счет психики субъекта. WIP")
             .WithIcon(SpriteManager.Get(TechType.Rebreather));
 
         public static void Register()
@@ -23,8 +24,8 @@ namespace experimentalmod.Items.Equipment
 
             var recipe = new RecipeData(
                 new Ingredient(TechType.Rebreather, 1),
-                new Ingredient(TechType.Magnetite, 2),
-                new Ingredient(TechType.Uranium, 1)
+                new Ingredient(UnknownMinerales.Info.TechType, 2),
+                new Ingredient(TechType.Uranium, 2)
             );
             customPrefab.SetRecipe(recipe).WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetEquipment(EquipmentType.Head);
