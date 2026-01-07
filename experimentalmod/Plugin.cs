@@ -15,7 +15,7 @@ namespace experimentalmod
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInDependency("com.snmodding.nautilus")]
-    [BepInDependency("com.lee23.ecclibrary")] // ДОБАВЬ ЭТУ СТРОКУ, чтобы игра знала, что нам нужна ECCLibrary
+    [BepInDependency("com.lee23.ecclibrary")]
     public class Plugin : BaseUnityPlugin
     {
         public new static ManualLogSource Logger { get; private set; }
@@ -40,15 +40,16 @@ namespace experimentalmod
             UnknownMinerales.Register();
             TechKnifePrefab.Register();
             ShadowRebreather.Register();
-            var shadowLevInfo = PrefabInfo.WithTechType("ShadowLev", "Shadow Leviathan", "Теневой ужас.")
+
+            // Загрузка рыб))
+            // 1. DEEP LEVIATHAN
+            var DeepLevInfo = PrefabInfo.WithTechType("Deeplev", "Deep Leviathan", "Глубинный ужас.")
                 .WithIcon(SpriteManager.Get(TechType.ReaperLeviathan));
-
-            var shadowLev = new ShadowLeviathan(shadowLevInfo);
-            shadowLev.Register();
-
-            ShadowLeviathan.SetupEncyclopedia(shadowLevInfo.TechType);
-            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(shadowLevInfo.TechType, new Vector3(1500f, -200f, 0f)));
-            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(shadowLevInfo.TechType, new Vector3(-1500f, -300f, 500f)));
+            var DeepLev = new DeepLeviathan(DeepLevInfo);
+            DeepLev.Register();
+            DeepLeviathan.SetupEncyclopedia(DeepLevInfo.TechType);
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(DeepLevInfo.TechType, new Vector3(1800f, -100f, 0f)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(DeepLevInfo.TechType, new Vector3(-2000f, -100f, 0f)));
         }
     }
 }
