@@ -99,7 +99,7 @@ namespace experimentalmod.Items
                 "Глубинный Левиафан",
                 levDescription
             );
-            PDAHandler.AddCustomScannerEntry(techType, 8f, false, keyLev);
+            PDAHandler.AddCustomScannerEntry(techType, 5f, false, keyLev);
             StoryGoalHandler.RegisterItemGoal(keyLev, Story.GoalType.Encyclopedia, techType);
         }
     }
