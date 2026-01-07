@@ -12,7 +12,7 @@ namespace experimentalmod.Items.Equipment
     public static class ShadowRebreather
     {
         public static PrefabInfo Info { get; } = PrefabInfo
-            .WithTechType("ShadowRebreather", "Ребризер 'Тень'WIP", "Экспериментальный прототип. Стабилизирует кислород за счет психики субъекта. WIP")
+            .WithTechType("ShadowRebreather", "Ребризер 'Тень' WIP", "Экспериментальный прототип. Стабилизирует кислород за счет психики субъекта. WIP")
             .WithIcon(SpriteManager.Get(TechType.Rebreather));
 
         public static void Register()
