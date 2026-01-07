@@ -13,17 +13,22 @@ namespace experimentalmod
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInDependency("com.snmodding.nautilus")]
+    [BepInDependency("com.lee23.ecclibrary")] // ДОБАВЬ ЭТУ СТРОКУ, чтобы игра знала, что нам нужна ECCLibrary
     public class Plugin : BaseUnityPlugin
     {
         public new static ManualLogSource Logger { get; private set; }
         private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-        private static string AssetsFolder => Path.Combine(Path.GetDirectoryName(Assembly.Location), "Assets");
 
         private void Awake()
         {
             Logger = base.Logger;
-            InitializePrefabs();
+
+            // Сначала патчим гармонию
             Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
+
+            // Затем инициализируем префабы
+            InitializePrefabs();
+
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         }
 
@@ -33,6 +38,12 @@ namespace experimentalmod
             UnknownMinerales.Register();
             TechKnifePrefab.Register();
             ShadowRebreather.Register();
+            var shadowLevInfo = PrefabInfo.WithTechType("ShadowLev", "Shadow Leviathan", "Теневой ужас.")
+                .WithIcon(SpriteManager.Get(TechType.ReaperLeviathan));
+
+            var shadowLev = new ShadowLeviathan(shadowLevInfo);
+            shadowLev.Register();
+            ShadowLeviathan.SetupEncyclopedia(shadowLevInfo.TechType);
         }
     }
 }
