@@ -1,10 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using ECCLibrary;
 using experimentalmod.Items;
 using experimentalmod.Items.Equipment;
 using experimentalmod.Items.Minerals;
 using HarmonyLib;
 using Nautilus.Assets;
+using Nautilus.Handlers;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -43,7 +45,10 @@ namespace experimentalmod
 
             var shadowLev = new ShadowLeviathan(shadowLevInfo);
             shadowLev.Register();
+
             ShadowLeviathan.SetupEncyclopedia(shadowLevInfo.TechType);
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(shadowLevInfo.TechType, new Vector3(1500f, -200f, 0f)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(shadowLevInfo.TechType, new Vector3(-1500f, -300f, 500f)));
         }
     }
 }

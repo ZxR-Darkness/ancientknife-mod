@@ -28,21 +28,23 @@ namespace experimentalmod.Items
                 Debug.LogError("O.S. TEAM: ShadowFish.prefab не найден!");
                 return null;
             }
-            var template = new CreatureTemplate(model, BehaviourType.Leviathan, EcoTargetType.Leviathan, 1)
+            var template = new CreatureTemplate(model, BehaviourType.Leviathan, EcoTargetType.Shark, 5000f)
             {
                 CellLevel = LargeWorldEntity.CellLevel.Far,
                 Mass = 5000f,
                 EyeFOV = -1.0f,
                 AcidImmune = true,
-                LocomotionData = new LocomotionData(10f, 2f, 2f, 0.1f),
-
+                LocomotionData = new LocomotionData(5f, 0.5f, 0.5f, 0.1f),
                 AnimateByVelocityData = new AnimateByVelocityData(5f),
                 SwimRandomData = new SwimRandomData(0.2f, 10f, new Vector3(30f, 10f, 30f)),
             };
 
             template.AttackLastTargetData = new AttackLastTargetData(1f, 15f, 0.5f, 5f);
 
-            template.AddAggressiveWhenSeeTargetData(new AggressiveWhenSeeTargetData(EcoTargetType.Leviathan, 1f, 50f, 2));
+            // Он будет агрессивен к игроку (Sub) и другим крупным существам
+            template.AddAggressiveWhenSeeTargetData(new AggressiveWhenSeeTargetData(EcoTargetType.Tech, 1f, 50f, 2));
+            template.AddAggressiveWhenSeeTargetData(new AggressiveWhenSeeTargetData(EcoTargetType.Leviathan, 0.5f, 30f, 1));
+            template.AddAggressiveWhenSeeTargetData(new AggressiveWhenSeeTargetData(EcoTargetType.Shark, 1f, 80f, 3));
 
             return template;
         }
