@@ -43,7 +43,7 @@ namespace experimentalmod.Items
 
             if (model == null)
             {
-                Debug.LogError("O.S. TEAM: ShadowFish.prefab не найден!");
+                Debug.LogError("ALTERRA TECH: ShadowFish.prefab не найден!");
                 return null;
             }
 
