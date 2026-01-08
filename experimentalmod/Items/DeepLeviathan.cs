@@ -33,6 +33,8 @@ namespace experimentalmod.Items
 
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(1800f, -100f, 0f)));
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(-2000f, -100f, 0f)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(-2100f, -100f, 0f)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(1900f, -100f, 0f)));
         }
 
         protected override CreatureTemplate CreateTemplate()
