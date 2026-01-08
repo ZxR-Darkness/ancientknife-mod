@@ -20,7 +20,7 @@ namespace experimentalmod.Items.Minerals
 
             string iconPath = Path.Combine(ModPath, "Assets", "UnknownMineralIcon.png");
 
-            Info = PrefabInfo.WithTechType("UnknownMineral", "Unknown Mineral", "Материал неизвестного происхождения. нигде не используется")
+            Info = PrefabInfo.WithTechType("UnknownMineral", "Неизвестный Минерал", "Материал неизвестного происхождения. нигде не используется")
                 .WithIcon(ImageUtils.LoadSpriteFromFile(iconPath));
 
             var customPrefab = new CustomPrefab(Info);
