@@ -18,23 +18,40 @@ namespace experimentalmod.Items
 
     public class DeepLeviathan : CreatureAsset
     {
+        public static PrefabInfo Info { get; } = PrefabInfo
+            .WithTechType("Deeplev", "Deep Leviathan", "Глубинный ужас.")
+            .WithIcon(SpriteManager.Get(TechType.ReaperLeviathan));
+
         public DeepLeviathan(PrefabInfo info) : base(info) { }
+
+        public static void RegisterEntity()
+        {
+            var deepLev = new DeepLeviathan(Info);
+            deepLev.Register();
+
+            SetupEncyclopedia(Info.TechType);
+
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(1800f, -100f, 0f)));
+            CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(Info.TechType, new Vector3(-2000f, -100f, 0f)));
+        }
+
         protected override CreatureTemplate CreateTemplate()
         {
-            GameObject model = StaticStructures.Bundle.LoadAsset<GameObject>("Assets/ShadowFish.prefab");
+            GameObject model = Plugin.Bundle.LoadAsset<GameObject>("Assets/ShadowFish.prefab");
 
             if (model == null)
             {
                 Debug.LogError("O.S. TEAM: ShadowFish.prefab не найден!");
                 return null;
             }
+
             var template = new CreatureTemplate(model, BehaviourType.Leviathan, EcoTargetType.Shark, 5000f)
             {
                 CellLevel = LargeWorldEntity.CellLevel.Far,
                 Mass = 5000f,
                 EyeFOV = -1.0f,
                 AcidImmune = true,
-                LocomotionData = new LocomotionData(4f, 0.5f, 0.5f, 0.1f),
+                LocomotionData = new LocomotionData(3f, 0.5f, 0.5f, 0.1f),
                 AnimateByVelocityData = new AnimateByVelocityData(4f),
                 SwimRandomData = new SwimRandomData(0.2f, 10f, new Vector3(30f, 10f, 30f)),
             };
@@ -53,7 +70,7 @@ namespace experimentalmod.Items
             if (rb != null)
             {
                 rb.useGravity = false;
-                rb.interpolation = RigidbodyInterpolation.Interpolate; // Важно для плавности
+                rb.interpolation = RigidbodyInterpolation.Interpolate;
                 rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
                 rb.mass = 5000f;
             }
@@ -74,6 +91,7 @@ namespace experimentalmod.Items
 
             yield break;
         }
+
         public static void SetupEncyclopedia(TechType techType)
         {
             LanguageHandler.SetLanguageLine("EncyPath_Lifeforms/Fauna/Shadow-Protocol", "PROJECT SHADOW");
@@ -93,6 +111,7 @@ namespace experimentalmod.Items
                 "В случае физического контакта рекомендуется использование <b>Теневого Ножа</b> для дестабилизации атомных связей существа. " +
                 "Обычное оружие не способно пробить резонансную защиту чешуи.\n\n" +
                 "<i>«Оно видит тебя, даже когда ты закрываешь глаза».</i>";
+
             PDAHandler.AddEncyclopediaEntry(
                 keyLev,
                 "Lifeforms/Fauna/Shadow-Protocol",

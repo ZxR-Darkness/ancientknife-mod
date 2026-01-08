@@ -1,6 +1,7 @@
 ﻿using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Crafting;
 using Nautilus.Handlers;
 using Nautilus.Utility;
 using System.IO;
@@ -40,7 +41,12 @@ namespace experimentalmod.Items.Minerals
                     }
                 }
             };
-
+            var recipe = new RecipeData(
+                new Ingredient(TechType.Uranium, 2),
+                new Ingredient(TechType.Titanium, 2),
+                new Ingredient(TechType.PrecursorIonCrystal, 1)
+            );
+            customPrefab.SetRecipe(recipe).WithFabricatorType(CraftTree.Type.Fabricator);
             customPrefab.SetGameObject(mineralClone);
             customPrefab.SetSpawns(
                 new LootDistributionData.BiomeData { biome = BiomeType.SafeShallows_Grass, count = 1, probability = 0.5f },

@@ -9,8 +9,6 @@ namespace experimentalmod.Items
 {
     public static class StaticStructures
     {
-        public static AssetBundle Bundle;
-        public static string ModPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static PrefabInfo TitanicInfo { get; } = PrefabInfo
             .WithTechType("TitanicStructure", "Titanic", "Огромный обломок древнего судна.");
 
@@ -18,11 +16,6 @@ namespace experimentalmod.Items
 
         public static void Register()
         {
-            string bundlePath = Path.Combine(ModPath, "Assets", "assetbundlev2");
-
-            if (!File.Exists(bundlePath)) return;
-            if (Bundle == null)
-                Bundle = AssetBundle.LoadFromFile(bundlePath);
             var titanicPrefab = CreateBasePrefab(TitanicInfo, "Assets/titanic.prefab");
             var serverPrefab = CreateBasePrefab(ServerInfo, "Assets/serverV3.prefab");
             EncyPda();
@@ -33,7 +26,7 @@ namespace experimentalmod.Items
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(ServerInfo.TechType, new Vector3Int(0, 10, 0)));
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TitanicInfo.TechType, new Vector3(-1745f, -420f, 0f)));
 
-            // Тест спавна предмета
+
             CoordinatedSpawnsHandler.RegisterCoordinatedSpawn(new SpawnInfo(TechType.PrecursorIonCrystal, new Vector3(0, 30, 0)));
         }
 
@@ -84,7 +77,7 @@ namespace experimentalmod.Items
 
             customPrefab.SetGameObject(() =>
             {
-                GameObject prefab = Bundle.LoadAsset<GameObject>(assetPath);
+                GameObject prefab = Plugin.Bundle.LoadAsset<GameObject>(assetPath);
                 if (prefab == null) return new GameObject("Empty (Bundle Error)");
 
                 GameObject instance = Object.Instantiate(prefab);
