@@ -5,7 +5,11 @@
 ![Game](https://img.shields.io/badge/Game-Subnautica-cyan)
 
 **Alterra Tech** — это амбициозная сюжетная модификация для Subnautica, раскрывающая тайны запретных технологий Альтерры.
-
+<div align="center">
+  <img src="banner.jpg" width="100%" alt="Alterra Tech Teaser">
+  <br>
+  <em>«Некоторые вещи должны оставаться во тьме».</em>
+</div>
 ⚠️ **ВНИМАНИЕ:** Мод находится в активной стадии разработки (**Work In Progress**). Публичный релиз еще не состоялся.
 
 ---
