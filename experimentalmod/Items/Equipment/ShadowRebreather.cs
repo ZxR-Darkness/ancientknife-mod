@@ -78,8 +78,6 @@ namespace experimentalmod.Items.Equipment
 
                 Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 1.0f);
             }
-
-
             if (Time.time > nextEffectTime)
             {
                 float depthFactor = Mathf.Clamp01(depth / 600f);

@@ -45,8 +45,6 @@ namespace experimentalmod.Items.Equipment
                     {
                         renderer.material.mainTexture = ImageUtils.LoadTextureFromFile(diffusePath);
                     }
-
-
                     if (File.Exists(illumPath))
                     {
 
