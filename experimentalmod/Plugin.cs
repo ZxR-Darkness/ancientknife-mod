@@ -50,7 +50,7 @@ namespace experimentalmod
             StaticStructures.Register();
             UnknownMinerales.Register();
             TechKnifePrefab.Register();
-            ShadowRebreather.Register();
+            //ShadowRebreather.Register();
             DeepLeviathan.RegisterEntity();
         }
     }
