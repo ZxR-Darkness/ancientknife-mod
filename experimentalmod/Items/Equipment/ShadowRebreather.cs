@@ -76,7 +76,7 @@ namespace experimentalmod.Items.Equipment
             if (Player.main.IsUnderwater() && depth > 100f)
             {
 
-                Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 1.0f);
+                Player.main.oxygenMgr.AddOxygen(Time.deltaTime * 1.0f); 
             }
             if (Time.time > nextEffectTime)
             {
